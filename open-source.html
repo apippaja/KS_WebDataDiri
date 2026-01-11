@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Open Source - Afifullah Ajuna Putra</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * { margin:0; padding:0; box-sizing:border-box; font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+
+        :root {
+            --primary-color: #f97316;
+            --secondary-color: #ea580c;
+            --accent-color: #fb923c;
+            --dark-color: #7c2d12;
+            --light-color: #fed7aa;
+            --text-color: #1f2937;
+            --bg-color: #fffbeb;
+            --card-bg: rgba(255, 255, 255, 0.9);
+            --shadow: 0 4px 10px rgba(249, 115, 22, 0.15);
+            --transition: all 0.3s ease;
+        }
+
+        body {
+            background: linear-gradient(135deg, #fffbeb 0%, #fff7ed 100%);
+            color: var(--text-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        header {
+            background: linear-gradient(90deg, #7c2d12, #ea580c, #f97316);
+            color: white;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .container { width:90%; max-width:1200px; margin:0 auto; }
+
+        nav { display:flex; justify-content:space-between; align-items:center; }
+
+        .logo { font-size:1.8rem; font-weight:bold; display:flex; align-items:center; gap:10px; color:white; }
+        .logo i { color: #ffd700; }
+
+        .nav-links { display:flex; list-style:none; justify-content:space-evenly; flex:1; }
+        .nav-links li { flex:1; text-align:center; }
+
+        .nav-links a {
+            color:#fff; text-decoration:none; font-weight:600; letter-spacing:1px;
+            padding:0.8rem 1rem; display:block; border-radius:6px; transition:var(--transition);
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            background:rgba(255,255,255,0.2); box-shadow:0 0 15px rgba(255,255,255,0.2);
+            transform:translateY(-2px);
+        }
+
+        .menu-toggle { display:none; flex-direction:column; cursor:pointer; }
+        .menu-toggle span { width:25px; height:3px; background-color:white; margin:3px 0; transition:var(--transition); }
+
+        main { min-height:80vh; padding:3rem 0; }
+
+        .section-title {
+            text-align:center; margin-bottom:3rem; color:var(--secondary-color);
+            position:relative; font-size:2.5rem;
+        }
+
+        .section-title::after {
+            content:''; display:block; width:100px; height:4px;
+            background:linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            margin:0.5rem auto; border-radius:2px;
+        }
+
+        .philosophy-container {
+            display:grid; grid-template-columns:repeat(auto-fit, minmax(300px, 1fr));
+            gap:2rem; margin-bottom:3rem;
+        }
+
+        .philosophy-card {
+            background:var(--card-bg); border-radius:15px; overflow:hidden;
+            box-shadow:var(--shadow); transition:var(--transition);
+            position:relative; border:2px solid var(--light-color);
+        }
+
+        .philosophy-card:hover {
+            transform:translateY(-10px); box-shadow:0 10px 20px rgba(249,115,22,0.2);
+            border-color:var(--primary-color);
+        }
+
+        .card-icon {
+            background:linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color:white; font-size:2.5rem; padding:1.5rem; text-align:center;
+        }
+
+        .card-content { padding:1.5rem; }
+        .card-content h3 { color:var(--secondary-color); margin-bottom:1rem; font-size:1.5rem; border-bottom:2px solid var(--light-color); padding-bottom:0.5rem; }
+        .card-content p { color:var(--text-color); line-height:1.7; }
+
+        .values-container {
+            background:var(--card-bg); border-radius:15px; padding:2rem;
+            box-shadow:var(--shadow); margin-bottom:3rem; border:2px solid var(--light-color);
+            position:relative;
+        }
+
+        .values-container::before {
+            content:''; position:absolute; top:0; left:0;
+            width:100%; height:5px; background:linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+        }
+
+        .values-grid {
+            display:grid; grid-template-columns:repeat(auto-fit, minmax(250px, 1fr));
+            gap:1.5rem; margin-top:1.5rem;
+        }
+
+        .value-item {
+            background:rgba(249,115,22,0.06); padding:1.5rem; border-radius:10px;
+            border-left:4px solid var(--primary-color); transition:var(--transition);
+            border:1px solid var(--light-color);
+        }
+
+        .value-item:hover { transform:translateX(5px); background:rgba(249,115,22,0.1); }
+        .value-item strong { color:var(--primary-color); display:block; margin-bottom:0.5rem; font-size:1.1rem; }
+
+        .priority-container {
+            background:linear-gradient(135deg, rgba(254,215,170,0.1), rgba(251,146,60,0.1));
+            border-radius:15px; padding:2rem; box-shadow:var(--shadow);
+            border:2px dashed var(--primary-color);
+        }
+
+        .priority-content { display:flex; align-items:center; gap:2rem; margin-top:1.5rem; }
+        .priority-icon {
+            background:var(--primary-color); color:white; width:80px; height:80px;
+            border-radius:50%; display:flex; align-items:center; justify-content:center;
+            flex-shrink:0; font-size:2rem; box-shadow:0 0 20px rgba(249,115,22,0.3);
+        }
+
+        .priority-text { flex:1; }
+        .priority-text p { margin-bottom:1rem; line-height:1.7; color:var(--text-color); }
+
+        .highlight {
+            background:var(--primary-color); color:white; padding:0.3rem 0.8rem;
+            border-radius:20px; font-weight:bold; display:inline-block; margin:0.5rem 0;
+        }
+
+        .github-stats {
+            display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr));
+            gap:1.5rem; margin-top:2rem;
+        }
+
+        .stat-item {
+            background:var(--card-bg); padding:1.5rem; border-radius:10px;
+            text-align:center; box-shadow:var(--shadow); transition:var(--transition);
+            border:1px solid var(--light-color);
+        }
+
+        .stat-item:hover { transform:translateY(-5px); border-color:var(--primary-color); }
+        .stat-number { font-size:2.5rem; font-weight:bold; color:var(--primary-color); margin-bottom:0.5rem; }
+        .stat-label { color:var(--dark-color); font-weight:600; }
+
+        footer {
+            background:linear-gradient(90deg, #7c2d12, #ea580c);
+            color:white; text-align:center; padding:2rem 0; margin-top:3rem;
+        }
+
+        .footer-content { display:flex; flex-direction:column; align-items:center; gap:1rem; }
+        .social-links { display:flex; gap:15px; }
+        .social-links a { color:white; font-size:1.5rem; transition:var(--transition); }
+        .social-links a:hover { color:#ffd700; transform:translateY(-3px); }
+
+        @media (max-width:768px) {
+            .menu-toggle { display:flex; }
+            .nav-links {
+                display:none; flex-direction:column; position:absolute;
+                top:100%; left:0; right:0; background:linear-gradient(180deg, #7c2d12, #ea580c);
+                padding:1rem; box-shadow:var(--shadow);
+            }
+            .nav-links.active { display:flex; }
+            .nav-links li { margin:0.5rem 0; }
+            .priority-content { flex-direction:column; text-align:center; }
+            .values-grid { grid-template-columns:1fr; }
+            .github-stats { grid-template-columns:repeat(2, 1fr); }
+        }
+
+        @media (max-width:480px) { .github-stats { grid-template-columns:1fr; } }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">
+                    <i class="fas fa-user-graduate"></i>
+                    <span>Afifullah Ajuna Putra</span>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="index.html">🏠 Home</a></li>
+                    <li><a href="kapita-selekta.html">📖 Kapita Selekta</a></li>
+                    <li><a href="business-plan.html">📈 Business Plan</a></li>
+                    <li><a href="flatteners.html">🌐 10 Flatteners</a></li>
+                    <li><a href="open-source.html" class="active">💻 Open Source</a></li>
+                    <li><a href="rencana-bisnis.html">💼 Rencana Bisnis</a></li>
+                    <li><a href="seminar.html">👥 Seminar</a></li>
+                </ul>
+                <div class="menu-toggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="open-source">
+            <div class="container">
+                <h2 class="section-title">Open Source Philosophy</h2>
+                
+                <div class="philosophy-container">
+                    <div class="philosophy-card">
+                        <div class="card-icon"><i class="fab fa-osi"></i></div>
+                        <div class="card-content">
+                            <h3>Pengertian Filosofi Open Source</h3>
+                            <p>Open source adalah filosofi yang mendukung distribusi gratis atas source code sebuah software untuk memungkinkan penggunaan, modifikasi, dan redistribusi yang bebas.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="philosophy-card">
+                        <div class="card-icon"><i class="fas fa-history"></i></div>
+                        <div class="card-content">
+                            <h3>Sejarah Singkat</h3>
+                            <p>Gerakan open source dimulai pada akhir 1990-an sebagai respons terhadap pembatasan perangkat lunak proprietary.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="philosophy-card">
+                        <div class="card-icon"><i class="fas fa-globe"></i></div>
+                        <div class="card-content">
+                            <h3>Dampak Global</h3>
+                            <p>Open source telah mengubah cara kita berkolaborasi dalam pengembangan teknologi.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="values-container">
+                    <h3 style="color: var(--primary-color); margin-bottom: 1.5rem; text-align: center;">
+                        <i class="fas fa-heart"></i> Nilai-nilai Penting Open Source
+                    </h3>
+                    
+                    <div class="values-grid">
+                        <div class="value-item">
+                            <strong>Keterbukaan (Transparency)</strong>
+                            <p>Source code tersedia untuk dilihat, dipelajari, dan dimodifikasi oleh siapa saja.</p>
+                        </div>
+                        
+                        <div class="value-item">
+                            <strong>Kolaborasi (Collaboration)</strong>
+                            <p>Pengembang dari seluruh dunia dapat berkontribusi untuk meningkatkan software.</p>
+                        </div>
+                        
+                        <div class="value-item">
+                            <strong>Berbagi Ilmu (Knowledge Sharing)</strong>
+                            <p>Pengetahuan dan solusi teknis dibagikan secara terbuka untuk kemajuan bersama.</p>
+                        </div>
+                        
+                        <div class="value-item">
+                            <strong>Kemerdekaan (Freedom)</strong>
+                            <p>Pengguna tidak terkunci pada vendor tertentu dan dapat menyesuaikan software sesuai kebutuhan.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="priority-container">
+                    <h3 style="color: var(--primary-color); margin-bottom: 1.5rem; text-align: center;">
+                        <i class="fas fa-star"></i> Prioritas dalam Studi/Proyek
+                    </h3>
+                    
+                    <div class="priority-content">
+                        <div class="priority-icon"><i class="fas fa-users"></i></div>
+                        <div class="priority-text">
+                            <p>Nilai yang paling sering saya terapkan dalam studi atau proyek adalah <span class="highlight">kolaborasi</span>. Dalam mengerjakan tugas maupun proyek pribadi, saya sering berkolaborasi dengan teman-teman untuk saling membantu memecahkan masalah teknis.</p>
+                            <p>Nilai <span class="highlight">keterbukaan</span> juga saya terapkan dengan membagikan kode proyek saya di platform seperti GitHub untuk mendapatkan masukan dari developer lain.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="github-stats">
+                        <div class="stat-item"><div class="stat-number">15+</div><div class="stat-label">Proyek Open Source</div></div>
+                        <div class="stat-item"><div class="stat-number">50+</div><div class="stat-label">Kontribusi</div></div>
+                        <div class="stat-item"><div class="stat-number">5</div><div class="stat-label">Teknologi yang Dikuasai</div></div>
+                        <div class="stat-item"><div class="stat-number">100%</div><div class="stat-label">Komitmen Kolaborasi</div></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <p>&copy; 2025 Afifullah Ajuna Putra. All rights reserved.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                    <a href="#"><i class="fab fa-github"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="mailto:email@example.com"><i class="fas fa-envelope"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const menuToggle = document.querySelector('.menu-toggle');
+        const navLinks = document.querySelector('.nav-links');
+        menuToggle.addEventListener('click', () => { navLinks.classList.toggle('active'); });
+    </script>
+</body>
+</html>
