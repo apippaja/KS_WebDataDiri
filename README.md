@@ -1,0 +1,2 @@
+# KS_WebDataDiri
+UTS KAPITA SELEKTA
